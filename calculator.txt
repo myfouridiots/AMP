@@ -1,0 +1,151 @@
+pract7
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/num1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter number 1"
+        android:layout_marginBottom="16dp"/>
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter number 2"
+        android:layout_marginBottom="16dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Subtract"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Divide"
+            android:layout_marginEnd="8dp"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Multiply"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:text="Result is: "/>
+</LinearLayout>
+
+
+package com.example.calculator_239744
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        add()
+        sub()
+        div()
+        mul()
+    }
+
+    fun add() {
+        val num1 = findViewById<EditText>(R.id.num1)
+        val num2 = findViewById<EditText>(R.id.num2)
+        val btn1 = findViewById<Button>(R.id.btn1)
+        val result = findViewById<TextView>(R.id.result)
+
+        btn1.setOnClickListener {
+            val num1 = num1.text.toString().toInt()
+            val num2 = num2.text.toString().toInt()
+            val sum = num1 + num2
+            result.text = sum.toString()
+            Toast.makeText(this, "$sum", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun sub() {
+        val num1 = findViewById<EditText>(R.id.num1)
+        val num2 = findViewById<EditText>(R.id.num2)
+        val btn1 = findViewById<Button>(R.id.btn2)
+        val result = findViewById<TextView>(R.id.result)
+
+        btn1.setOnClickListener {
+            val num1 = num1.text.toString().toInt()
+            val num2 = num2.text.toString().toInt()
+            val sub = num1 - num2
+            result.text = sub.toString()
+            Toast.makeText(this, "$sub", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun div() {
+        val num1 = findViewById<EditText>(R.id.num1)
+        val num2 = findViewById<EditText>(R.id.num2)
+        val btn1 = findViewById<Button>(R.id.btn3)
+        val result = findViewById<TextView>(R.id.result)
+
+        btn1.setOnClickListener {
+            val num1 = num1.text.toString().toInt()
+            val num2 = num2.text.toString().toInt()
+            val div = num1 / num2
+            result.text = div.toString()
+            Toast.makeText(this, "$div", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun mul() {
+        val num1 = findViewById<EditText>(R.id.num1)
+        val num2 = findViewById<EditText>(R.id.num2)
+        val btn1 = findViewById<Button>(R.id.btn4)
+        val result = findViewById<TextView>(R.id.result)
+
+        btn1.setOnClickListener {
+            val num1 = num1.text.toString().toInt()
+            val num2 = num2.text.toString().toInt()
+            val mul = num1 * num2
+            result.text = mul.toString()
+            Toast.makeText(this, "$mul", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+

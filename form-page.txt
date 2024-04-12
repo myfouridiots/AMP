@@ -1,0 +1,152 @@
+pract8
+
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edt"
+            android:hint="Enter Your Name"
+            android:textSize="20dp"/>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbfemale"
+                android:textSize="20dp"
+                android:text="Female"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbmale"
+                android:textSize="20dp"
+                android:text="Male"/>
+        </RadioGroup>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sing"
+            android:text="Sing"
+            android:textSize="20dp"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dance"
+            android:text="Dance"
+            android:textSize="20dp"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/write"
+            android:text="Write"
+            android:textSize="20dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn"
+            android:text="Click"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvname"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvhobbies"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvgender"
+            android:textSize="20dp"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgbtn"
+            android:src="@mipmap/ic_launcher"/>
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tb"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+</ScrollView>
+
+
+package com.example.pract8_239744
+import android.os.Bundle
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val editText = findViewById<EditText>(R.id.edt)
+        val radioGroup = findViewById<RadioGroup>(R.id.rg)
+        val femaleRadioButton = findViewById<RadioButton>(R.id.rbfemale)
+        val maleRadioButton = findViewById<RadioButton>(R.id.rbmale)
+        val singCheckBox = findViewById<CheckBox>(R.id.sing)
+        val danceCheckBox = findViewById<CheckBox>(R.id.dance)
+        val writeCheckBox = findViewById<CheckBox>(R.id.write)
+        val button = findViewById<Button>(R.id.btn)
+        val nameTextView = findViewById<TextView>(R.id.tvname)
+        val hobbiesTextView = findViewById<TextView>(R.id.tvhobbies)
+        val genderTextView = findViewById<TextView>(R.id.tvgender)
+        val imageButton = findViewById<ImageButton>(R.id.imgbtn)
+        val toggleButton = findViewById<ToggleButton>(R.id.tb)
+
+        button.setOnClickListener {
+            val enteredName = editText.text.toString()
+            val gender = if (femaleRadioButton.isChecked) "Female" else "Male"
+            val hobbies = mutableListOf<String>()
+            if (singCheckBox.isChecked) hobbies.add("Sing")
+            if (danceCheckBox.isChecked) hobbies.add("Dance")
+            if (writeCheckBox.isChecked) hobbies.add("Write")
+
+            nameTextView.text = "Name: $enteredName"
+            hobbiesTextView.text = "Hobbies: ${hobbies.joinToString(", ")}"
+            genderTextView.text = "Gender: $gender"
+        }
+        imageButton.setOnClickListener {
+            // Action to perform when the image button is clicked
+            editText.text.clear()
+            radioGroup.clearCheck()
+            singCheckBox.isChecked = false
+            danceCheckBox.isChecked = false
+            writeCheckBox.isChecked = false
+            nameTextView.text = ""
+            hobbiesTextView.text = ""
+            genderTextView.text = ""
+        }
+        toggleButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // ToggleButton is toggled on
+                Toast.makeText(this, "Toggle Button is ON", Toast.LENGTH_SHORT).show()
+            } else {
+                // ToggleButton is toggled off
+                Toast.makeText(this, "Toggle Button is OFF", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+}
